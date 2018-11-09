@@ -42,7 +42,17 @@ namespace NGettext.Tests
 			this._TestLoadedTranslation(t);
 		}
 
-		private void _TestLoadedTranslation(ICatalog t)
+        [Fact]
+        public void TestWows()
+        {
+            using (var stream = File.OpenRead(Path.Combine(this.LocalesDir, Path.Combine("ja", Path.Combine("LC_MESSAGES", "global.mo")))))
+            {
+                var t = new Catalog(stream, new CultureInfo("ja"));
+            }
+            Assert.True(true);
+        }
+
+        private void _TestLoadedTranslation(ICatalog t)
 		{
 			Assert.Equal("тест", t.GetString("test"));
 			Assert.Equal("тест2", t.GetString("test2"));

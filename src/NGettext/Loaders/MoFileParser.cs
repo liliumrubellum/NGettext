@@ -160,8 +160,11 @@ namespace NGettext.Loaders
 							{
 								var headerName = headerText.Substring(0, separatorIndex);
 								var headerValue = headerText.Substring(separatorIndex + 1).Trim();
-								parsedFile.Headers.Add(headerName, headerValue.Trim());
-							}
+                                if (parsedFile.Headers.ContainsKey(headerName))
+                                {
+                                    parsedFile.Headers.Add(headerName, headerValue.Trim());
+                                }
+                            }
 						}
 
 						if (this.AutoDetectEncoding && parsedFile.Headers.ContainsKey("Content-Type"))
